@@ -21,7 +21,7 @@
                     <button class="btn mt-3">Login</button>
                 </form>
                 <div class="text-center fs-6">
-                    <a href="#">Forget password?</a> or <RouterLink :to="{name:'register'}">Sign Up</RouterLink>
+                    <a href="#">Forget password?</a> or <RouterLink :to="{ name: 'register' }">Sign Up</RouterLink>
                 </div>
             </div>
         </div>
@@ -29,26 +29,27 @@
 </template>
 
 <script>
+import toastr from 'toastr'
 export default {
     name: 'LoginPage',
-    data()
-    {
-        return{
-            credentials:{
-                user:null,
-                password:null,
+    data() {
+        return {
+            credentials: {
+                user: null,
+                password: null,
             }
         }
     },
-    methods:{
-        login()
-        {
-            this.$store.dispatch('login', this.credentials).then(()=>{
-               this.$router.push({
-                name: 'home'
-               });
+    methods: {
+        login() {
+
+            this.$store.dispatch('login', this.credentials).then(() => {
+                toastr.success('Login successful');
+                this.$router.push({
+                    name: 'home'
+                });
             });
-            
+
         }
     }
 }
